@@ -1,116 +1,62 @@
-# Linear & Logistic Regression
+# AI Lab — Gradient Descent + Linear Regression
 
-This lab focuses ONLY on:
-- Linear Regression (Diabetes dataset)
-- Logistic Regression (Breast Cancer dataset)
+This GitHub Classroom assignment has **4 questions**:
 
-You will implement full supervised learning workflows
-and analyze model performance, stability, and overfitting.
+## Q1 — Implement & visualize gradient descent
+Implement gradient descent for linear regression and produce the arrays needed to visualize:
+- Loss vs epoch
+- Parameter path `(theta0, theta1)` in parameter space
 
-------------------------------------------------------------
-DATASETS USED
-------------------------------------------------------------
-1. sklearn.datasets.load_diabetes()
-   → Regression task
+Reference (inspiration): AML Book Lecture 3 (Linear Regression)  
+https://kuleshov-group.github.io/aml-book/contents/lecture3-linear-regression.html
 
-2. sklearn.datasets.load_breast_cancer()
-   → Binary classification task
+**You will implement:**
+- `gradient_descent_linreg(...)`
+- `visualize_gradient_descent(...)`
 
-------------------------------------------------------------
-ALLOWED LIBRARIES
-------------------------------------------------------------
-- numpy
-- scikit-learn
+---
 
-DO NOT use:
-- Deep learning libraries
-- Any model other than LinearRegression and LogisticRegression
+## Q2 — Diabetes linear regression using gradient descent
+Fit linear regression on the **sklearn diabetes dataset** using your GD implementation.
 
-------------------------------------------------------------
-GENERAL REQUIREMENTS
-------------------------------------------------------------
-- Follow function signatures EXACTLY.
-- Do NOT modify function names.
-- All functions must return values.
-- Use StandardScaler for feature scaling.
-- Split data using 80-20 train-test split.
-- Use random_state=42 for reproducibility.
-- Comment clearly where explanation is required.
+**You will implement:**
+- `diabetes_linear_gd(...)`
 
-------------------------------------------------------------
-QUESTION 1 (Linear Regression Pipeline)
-------------------------------------------------------------
-Using diabetes dataset:
+Return: `(train_mse, test_mse, train_r2, test_r2, theta)`
 
-1. Load dataset.
-2. Split into train and test (80-20).
-3. Standardize features (fit only on train).
-4. Train LinearRegression model.
-5. Compute:
-   - Train MSE
-   - Test MSE
-   - Train R²
-   - Test R²
-6. Identify top 3 features with largest absolute coefficients.
-7. In comments:
-   - Does the model overfit?
-   - Why is feature scaling important?
+---
 
-------------------------------------------------------------
-QUESTION 2 (Cross-Validation – Linear Regression)
-------------------------------------------------------------
-1. Perform 5-fold cross-validation on LinearRegression.
-2. Compute mean and standard deviation of R².
-3. Compare CV mean with test R² from Q1.
-4. In comments:
-   - What does standard deviation represent?
-   - How does CV reduce variance risk?
+## Q3 — Diabetes linear regression using analytical solution
+Implement the closed-form solution (normal equation) with a tiny ridge term for numerical stability:
 
-------------------------------------------------------------
-QUESTION 3 (Logistic Regression Pipeline)
-------------------------------------------------------------
-Using breast cancer dataset:
+\[
+\theta = (X^T X + \lambda I)^{-1} X^T y
+\]
 
-1. Split into train-test (80-20).
-2. Standardize features.
-3. Train LogisticRegression (max_iter=5000).
-4. Compute:
-   - Train Accuracy
-   - Test Accuracy
-   - Precision
-   - Recall
-   - F1-score
-   - Confusion matrix
-5. In comments:
-   - What does a False Negative mean in medical context?
+**You will implement:**
+- `diabetes_linear_analytical(...)`
 
-------------------------------------------------------------
-QUESTION 4 (Regularization in Logistic Regression)
-------------------------------------------------------------
-Train LogisticRegression for:
+Return: `(train_mse, test_mse, train_r2, test_r2, theta)`
 
-C = [0.01, 0.1, 1, 10, 100]
+---
 
-For each C:
-- Compute train accuracy
-- Compute test accuracy
+## Q4 — Compare GD vs Analytical solution
+Fit both methods and compare:
+- coefficient L2 difference
+- cosine similarity
+- differences in train/test metrics
 
-Return dictionary:
-{C: (train_acc, test_acc)}
+**You will implement:**
+- `diabetes_compare_gd_vs_analytical(...)`
 
-In comments:
-- What happens when C is very small?
-- What happens when C is very large?
-- Which case leads to overfitting?
+Return a dictionary with:
+- `theta_l2_diff`
+- `train_mse_diff`
+- `test_mse_diff`
+- `train_r2_diff`
+- `test_r2_diff`
+- `theta_cosine_sim`
 
-------------------------------------------------------------
-QUESTION 5 (Cross-Validation – Logistic Regression)
-------------------------------------------------------------
-1. Perform 5-fold cross-validation (C=1).
-2. Compute:
-   - Mean accuracy
-   - Std accuracy
-3. Compare CV mean with test accuracy.
-4. In comments:
-   - Why is cross-validation critical in medical diagnosis?
+---
 
+# Repo Structure
