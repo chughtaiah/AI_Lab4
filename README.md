@@ -56,7 +56,3 @@ Return a dictionary with:
 - `train_r2_diff`
 - `test_r2_diff`
 - `theta_cosine_sim`
-
----
-
-# Repo Structure
